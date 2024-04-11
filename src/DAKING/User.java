@@ -75,8 +75,8 @@ public class User {
             gender = genderInput.charAt(0); // 문자열의 첫 번째 문자 추출
         } else {
             // 유효하지 않은 입력일 경우 기본값으로 설정
-            gender = 'U'; // Unknown을 나타내는 기본값
-            System.out.println("잘못된 입력입니다. 기본값 'U'가 설정됩니다.");
+            gender = '남'; // Unknown을 나타내는 기본값
+            System.out.println("잘못된 입력입니다. 기본값 '남'가 설정됩니다.");
         }
 
         System.out.print("나이 : ");
