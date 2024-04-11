@@ -91,6 +91,7 @@ public class User {
         int weight = scanner.nextInt();
         scanner.nextLine();
 
+
         return new User(name, age, weight, height, gender);
     }
 

@@ -25,8 +25,8 @@ public class Main {
                     // 사용자 정보 입력
                     User user = User.getUserInfoFromInput();
                     // DietPlanner 클래스 인스턴스 생성
-                    DietPlanner dietPlanner = new DietPlanner(database, new User (), 1.0);
-                    dietPlanner.provideDietPlan(); // 식단 계획 제공 메서드 호출
+                    DietPlanner dietPlanner = new DietPlanner(database, user, 1.0);
+                    dietPlanner.provideDietPlan(user); // 식단 계획 제공 메서드 호출
                     break;
                 case 2:
                     break;

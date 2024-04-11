@@ -21,33 +21,63 @@ public class DietPlanner {
         this.scanner = new Scanner(System.in);
 
     }
-    public void provideDietPlan() {
+
+    public void provideDietPlan(User user) {
 
         System.out.println("================================================");
         System.out.println("식단 계획을 제공합니다.");
 
-        // 활동 수준 선택
-        double metabolicRate = getMetabolicRateFromActivityLevel();
+        // 유저의 기초대사랑 (BMR) 계산
+
+        int bmr;
+        if (user.getGender() == '남') {
+            // 남성의 경우 대사율 계산 방법
+            bmr = (int) (66.5 + (13.75 * user.getWeight()) + (5.003 * user.getHeight()) - (6.755 * user.getAge()));
+        } else {
+            // 여성의 경우 대사율 계산 방법
+            bmr = (int) (655.1 + (9.563 * user.getWeight()) + (1.850 * user.getHeight()) - (4.676 * user.getAge()));
+        }
+        // 활동 수준 선택 후 기초대사량에 적용 (비율 곱)
+        bmr = (int) (bmr * getMetabolicRateFromActivityLevel());
 
         // 식단 목적 선택
-        metabolicRate = adjustMetabolicRateBasedOnDietPurpose(metabolicRate);
-
-        // 목표 칼로리 계산
-        int goalCalories = calculateGoalCalories(metabolicRate);
+        bmr = adjustMetabolicRateBasedOnDietPurpose(bmr);
 
         // 식단 비율 선택
         double[] macronutrientRatios = selectMacronutrientRatios();
 
         // 하루 끼니 수 선택
-        double numMeals = selectNumberOfMeals();
+        int numMeals = selectNumberOfMeals(user);
 
         // 한 끼당 필요한 칼로리 계산
-        double caloriesPerMeal = goalCalories / numMeals;
+        double caloriesPerMeal = (double) bmr / numMeals;
+
+        test(bmr, numMeals);
 
         // 각 끼니별로 음식을 추천하여 출력
         recommendFoodsForMeals((int) caloriesPerMeal, macronutrientRatios, (int) numMeals);
     }
 
+    private void test(int bmr, int numMeals){
+        double carbohydrate1day = bmr * 0.5 / 4; // 탄수화물 1g당 4칼로리
+        double protein1day = bmr * 0.3 / 4; // 단백질 1g당 4칼로리
+        double fat1day = bmr * 0.2 / 9; // 지방 1g당 9칼로리
+
+        // 사용자의 탄단지칼로리 계산
+        System.out.println("================================================");
+        System.out.println(user.getName() + " 님의 하루 총 필요 탄,단,지,칼로리는");
+        System.out.println("탄: " + carbohydrate1day + ", 단:" + protein1day + ", 지: " + fat1day + ", 칼: " + bmr + " 입니다.");
+        System.out.println("================================================");
+
+        // 각 끼니당 먹어야 할 칼로리 계산
+        double[] caloriesPerMeal = calculateCaloriesPerMeal(numMeals, bmr);
+
+        // 각 끼니에 추천할 음식들을 선택
+        List<List<Food>> recommendedFoods = recommendFoodsForMeals(caloriesPerMeal, numMeals);
+
+        // 추천된 음식들 출력
+        printRecommendedFoods(recommendedFoods);
+    }
     private void recommendFoodsForMeals(int caloriesPerMeal, double[] macronutrientRatios, int numMeals) {
         List<Food> recommendedFoods = new ArrayList<>();
         Random random = new Random();
@@ -67,7 +97,7 @@ public class DietPlanner {
             double vegetablePer100g = randomFood.getVegetable();
             double snackPer100g = randomFood.getSnack();
 
-
+            //TODO: 작성 예정
             // 필요한 탄수화물 양 계산 (예: 100g 당 탄수화물 * 필요한 그램 수 / 100)
             double requiredCarbohydrate = carbohydratePer100g * (caloriesPerMeal / 4) / 100;
 
@@ -91,7 +121,7 @@ public class DietPlanner {
             case 3:
                 metabolicRate = 1.55;
                 break;
-            case 4 :
+            case 4:
                 metabolicRate = 1.725;
                 break;
             default:
@@ -103,7 +133,7 @@ public class DietPlanner {
         return metabolicRate;
     }
 
-    private double adjustMetabolicRateBasedOnDietPurpose(double metabolicRate) {
+    private int adjustMetabolicRateBasedOnDietPurpose(int metabolicRate) {
         System.out.println("================================================");
         System.out.println("식단 목적을 선택하세요");
         System.out.print("1. 다이어트 2. 벌크업 3. 건강 유지 : ");
@@ -125,12 +155,6 @@ public class DietPlanner {
         }
 
         return metabolicRate;
-    }
-
-    private int calculateGoalCalories(double metabolicRate) {
-        // 몸무게 및 다른 요인을 고려한 목표 칼로리 계산
-        int goalCalories = (int) (metabolicRate * user.getWeight()   /* 다른 요인들 */);
-        return goalCalories;
     }
 
     private double[] selectMacronutrientRatios() {
@@ -176,49 +200,14 @@ public class DietPlanner {
         return macronutrientRatios;
     }
 
-    private double selectNumberOfMeals() {
+    private int selectNumberOfMeals(User user) {
         int numMeals;
+
         do {
             System.out.println("================================================");
             System.out.print("하루 섭취할 끼니 수를 선택하세요 (3, 4, 5): ");
             numMeals = scanner.nextInt();
         } while (numMeals != 3 && numMeals != 4 && numMeals != 5);
-
-        int calculateMetabolicRate; {
-            int metabolicRate;
-            if (User.getUserInfoFromInput().getGender() == 'M') {
-                // 남성의 경우 대사율 계산 방법
-                metabolicRate = (int) (66.5 + (13.75 * User.getUserInfoFromInput().getWeight()) + (5.003 * User.getUserInfoFromInput().getHeight()) - (6.755 * User.getUserInfoFromInput().getAge()));
-            } else {
-                // 여성의 경우 대사율 계산 방법
-                metabolicRate = (int) (655.1 + (9.563 * User.getUserInfoFromInput().getWeight()) + (1.850 * User.getUserInfoFromInput().getHeight()) - (4.676 * User.getUserInfoFromInput().getAge()));
-            }
-            return metabolicRate;
-        }
-
-        String username = User.getUserInfoFromInput().getName();
-        int weight = user.getWeight();
-        int metabolicRate = calculateMetabolicRate(); // 사용자의 대사율 계산
-
-        double goalCalories1day = calculateMetabolicRate();
-        double carbohydrate1day = goalCalories1day * 0.5 / 4; // 탄수화물 1g당 4칼로리
-        double protein1day = goalCalories1day * 0.3 / 4; // 단백질 1g당 4칼로리
-        double fat1day = goalCalories1day * 0.2 / 9; // 지방 1g당 9칼로리
-
-        // 사용자의 탄단지칼로리 계산
-        System.out.println("================================================");
-        System.out.println(username + " 님의 하루 총 필요 탄,단,지,칼로리는");
-        System.out.println("탄: " + carbohydrate1day + ", 단:" + protein1day + ", 지: " + fat1day + ", 칼: " + goalCalories1day + " 입니다.");
-        System.out.println("================================================");
-
-        // 각 끼니당 먹어야 할 칼로리 계산
-        double[] caloriesPerMeal = calculateCaloriesPerMeal(numMeals, (int) goalCalories1day);
-
-        // 각 끼니에 추천할 음식들을 선택
-        List<List<Food>> recommendedFoods = recommendFoodsForMeals(caloriesPerMeal, numMeals);
-
-        // 추천된 음식들 출력
-        printRecommendedFoods(recommendedFoods);
 
         return numMeals;
     }
@@ -228,7 +217,7 @@ public class DietPlanner {
     }
 
     private int calculateGoalCalories() {
-        int goalCalories =(int) metabolicRate * user.getWeight();
+        int goalCalories = (int) metabolicRate * user.getWeight();
         return goalCalories;
     }
 
@@ -239,6 +228,7 @@ public class DietPlanner {
         }
         return caloriesPerMeal;
     }
+
     private List<List<Food>> recommendFoodsForMeals(double[] caloriesPerMeal, int numMeals) {
         List<List<Food>> recommendedFoods = new ArrayList<>();
         Random random = new Random();
