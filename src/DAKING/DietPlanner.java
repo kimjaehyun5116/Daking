@@ -93,6 +93,7 @@ public class DietPlanner {
                 break;
             case 4 :
                 metabolicRate = 1.725;
+                break;
             default:
                 System.out.println("잘못된 입력입니다. 기본값으로 보통을 선택합니다.");
                 metabolicRate = 1.2;
