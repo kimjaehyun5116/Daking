@@ -93,6 +93,10 @@ public class DietPlanner {
 
             // 추천된 음식을 리스트에 추가
             recommendedFoods.add(randomFood);
+
+            /* 끼니당 먹어야하는 음식의 양 =  requiredCarboydrat(필요한 탄수화물의 양) /
+             randomFood.getCarbohydrates(음식의 100g당 탄수화물양) * 100;
+            */
             // 해당 음식의 탄수화물 양 가져오기
             double carbohydratePer100g = randomFood.getCarbohydrates();
             double proteinPer100g = randomFood.getProtein();
