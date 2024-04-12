@@ -57,7 +57,6 @@ public class DietPlanner {
     }
 
 
-
     private void recommendFoodsForMeals(int caloriesPerMeal, double[] requiredCarbohydrate, int numMeals) {
         List<Food> recommendedFoods = new ArrayList<>();
         Random random = new Random();
@@ -218,6 +217,7 @@ public class DietPlanner {
         List<Food> foodsInGroup = database.getPredefinedFoods(group);
         return foodsInGroup.get(new Random().nextInt(foodsInGroup.size()));
     }
+
     private void test(int bmr, int numMeals, double[] macronutrientRatios, double neededCalories) {
         double carbohydrateRatio = macronutrientRatios[0];
         double proteinRatio = macronutrientRatios[1];
@@ -233,7 +233,7 @@ public class DietPlanner {
         System.out.println(user.getName() + " 님의 하루 총 필요 탄,단,지,칼로리는");
         System.out.println("탄: " + String.format("%.2f", carbohydrate1day) + ", 단:" + String.format("%.2f", protein1day) + ", 지: " + String.format("%.2f", fat1day) + ", 칼: " + String.format("%.2f", neededCalories) + " 이고, ");
         System.out.println(user.getName() + " 님의 한끼 필요 탄,단,지,칼로리는");
-        System.out.println("탄: " + String.format("%.2f", carbohydrate1day / numMeals ) + ", 단:" + String.format("%.2f", protein1day / numMeals) + ", 지: " + String.format("%.2f", fat1day / numMeals) + ", 칼: " + String.format("%.2f", neededCalories / numMeals) + " 입니다 ");
+        System.out.println("탄: " + String.format("%.2f", carbohydrate1day / numMeals) + ", 단:" + String.format("%.2f", protein1day / numMeals) + ", 지: " + String.format("%.2f", fat1day / numMeals) + ", 칼: " + String.format("%.2f", neededCalories / numMeals) + " 입니다 ");
         System.out.println("=====================================================");
         System.out.println(" ");
 
@@ -288,18 +288,18 @@ public class DietPlanner {
                                 + "칼: " + String.format("%.2f", fatperServing * food.getCalories() / 100.0) + "kcal, "
                                 + "섭취량:  " + String.format("%.2f", fatperServing) + "g)");
                         break;
-                    case "야채" :
+                    case "야채":
                         System.out.println("(탄: " + (food.getCarbohydrate()) + "g, "
-                                + "단: " +  (food.getProtein()) + "g, "
-                                + "지: " +  (food.getFat()) + "g, "
-                                + "칼: " +  (food.getCalories()) + "kcal, "
+                                + "단: " + (food.getProtein()) + "g, "
+                                + "지: " + (food.getFat()) + "g, "
+                                + "칼: " + (food.getCalories()) + "kcal, "
                                 + "섭취량: " + (100) + "g)");
                         break;
-                    case "간식" :
+                    case "간식":
                         System.out.println("(탄: " + (food.getCarbohydrate()) + "g, "
-                                + "단: " +  (food.getProtein()) + "g, "
-                                + "지: " +  (food.getFat()) + "g, "
-                                + "칼: " +  (food.getCalories()) + "kcal, "
+                                + "단: " + (food.getProtein()) + "g, "
+                                + "지: " + (food.getFat()) + "g, "
+                                + "칼: " + (food.getCalories()) + "kcal, "
                                 + "섭취량: " + (100) + "g)");
                         System.out.println("------------------------------------------------------------------------------------");
                         break;
@@ -307,11 +307,11 @@ public class DietPlanner {
                         System.out.println("유효하지 않은 식품 그룹입니다.");
                         break;
                 }
-                    // 칼로리 값의 반환이 틀림. Food.getCalories 가 잘못 반환하는것 같음
 
-                }
-
-                System.out.println(); // 끼니 사이에 빈 줄 추가
             }
+
+            System.out.println(); // 끼니 사이에 빈 줄 추가
+
         }
     }
+}
