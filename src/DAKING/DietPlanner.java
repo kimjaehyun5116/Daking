@@ -19,7 +19,6 @@ public class DietPlanner {
         this.user = user;
         this.metabolicRate = metabolicRate;
         this.scanner = new Scanner(System.in);
-
     }
 
     public void provideDietPlan(User user) {
@@ -57,31 +56,8 @@ public class DietPlanner {
         recommendFoodsForMeals((int) caloriesPerMeal, macronutrientRatios, (int) numMeals);
     }
 
-    private void test(int bmr, int numMeals, double[] macronutrientRatios, double neededCalories){
-        double carbohydrateRatio = macronutrientRatios[0];
-        double proteinRatio = macronutrientRatios[1];
-        double fatRatio = macronutrientRatios[2];
 
 
-        double carbohydrate1day = neededCalories * carbohydrateRatio / 4; // 탄수화물 1g당 4칼로리
-        double protein1day = neededCalories * proteinRatio / 4; // 단백질 1g당 4칼로리
-        double fat1day = neededCalories * fatRatio / 9; // 지방 1g당 9칼로리
-
-        // 사용자의 탄단지칼로리 계산
-        System.out.println("================================================");
-        System.out.println(user.getName() + " 님의 하루 총 필요 탄,단,지,칼로리는");
-        System.out.println("탄: " + String.format("%.2f",carbohydrate1day) + ", 단:" + String.format("%.2f", protein1day) + ", 지: " + String.format("%.2f", fat1day) + ", 칼: " + String.format("%.2f", neededCalories) + " 입니다.");
-        System.out.println("================================================");
-
-        // 각 끼니당 먹어야 할 칼로리 계산
-        double[] caloriesPerMeal = calculateCaloriesPerMeal(numMeals, (int) bmr);
-
-        // 각 끼니에 추천할 음식들을 선택
-        List<List<Food>> recommendedFoods = recommendFoodsForMeals(caloriesPerMeal, numMeals);
-
-        // 추천된 음식들 출력
-        printRecommendedFoods(recommendedFoods, carbohydrate1day, protein1day, fat1day , neededCalories, numMeals);
-    }
     private void recommendFoodsForMeals(int caloriesPerMeal, double[] requiredCarbohydrate, int numMeals) {
         List<Food> recommendedFoods = new ArrayList<>();
         Random random = new Random();
@@ -242,30 +218,100 @@ public class DietPlanner {
         List<Food> foodsInGroup = database.getPredefinedFoods(group);
         return foodsInGroup.get(new Random().nextInt(foodsInGroup.size()));
     }
+    private void test(int bmr, int numMeals, double[] macronutrientRatios, double neededCalories) {
+        double carbohydrateRatio = macronutrientRatios[0];
+        double proteinRatio = macronutrientRatios[1];
+        double fatRatio = macronutrientRatios[2];
+
+
+        double carbohydrate1day = neededCalories * carbohydrateRatio / 4; // 탄수화물 1g당 4칼로리
+        double protein1day = neededCalories * proteinRatio / 4; // 단백질 1g당 4칼로리
+        double fat1day = neededCalories * fatRatio / 9; // 지방 1g당 9칼로리
+
+        // 사용자의 탄단지칼로리 계산
+        System.out.println("=====================================================");
+        System.out.println(user.getName() + " 님의 하루 총 필요 탄,단,지,칼로리는");
+        System.out.println("탄: " + String.format("%.2f", carbohydrate1day) + ", 단:" + String.format("%.2f", protein1day) + ", 지: " + String.format("%.2f", fat1day) + ", 칼: " + String.format("%.2f", neededCalories) + " 이고, ");
+        System.out.println(user.getName() + " 님의 한끼 필요 탄,단,지,칼로리는");
+        System.out.println("탄: " + String.format("%.2f", carbohydrate1day / numMeals ) + ", 단:" + String.format("%.2f", protein1day / numMeals) + ", 지: " + String.format("%.2f", fat1day / numMeals) + ", 칼: " + String.format("%.2f", neededCalories / numMeals) + " 입니다 ");
+        System.out.println("=====================================================");
+        System.out.println(" ");
+
+        // 각 끼니당 먹어야 할 칼로리 계산
+        double[] caloriesPerMeal = calculateCaloriesPerMeal(numMeals, (int) bmr);
+
+        // 각 끼니에 추천할 음식들을 선택
+        List<List<Food>> recommendedFoods = recommendFoodsForMeals(caloriesPerMeal, numMeals);
+
+        // 추천된 음식들 출력
+        printRecommendedFoods(recommendedFoods, carbohydrate1day, protein1day, fat1day, neededCalories, numMeals);
+    }
 
     private void printRecommendedFoods(List<List<Food>> recommendedFoods, double carbohydrate1day, double protein1day, double fat1day, double neededCalories, int numMeals) {
         for (int i = 0; i < recommendedFoods.size(); i++) {
             System.out.println((i + 1) + "번째 식사");
+            System.out.println(" ");
 
             List<Food> mealFoods = recommendedFoods.get(i);
 
             for (Food food : mealFoods) {
-                double carbohydratePerServing = carbohydrate1day/numMeals;
-                double proteinPerServing = protein1day/numMeals;
-                double fatPerServing = fat1day/numMeals;
-                double caloriesPerServing = (carbohydratePerServing * 100) / food.getCarbohydrate();
-//         탄수화물의 값부터 다시 설정하기
-//       (탄수화물 단백질 지방 칼로리 섭취해야하는 양 까지 설정 후 (탄수화물 따로 단백질 따로 식을 넣어줘서 각기 다르게 계산되도록 하기)
-//                칼로리 설정값도 다시 계산해보기
-                System.out.println(food.getFoodGroup() + ": " +
-                        food.getName() + " (탄: " + String.format("%.2f", carbohydratePerServing) + "g" +
-                        ", 단: " + String.format("%.2f", proteinPerServing) + "g" +
-                        ", 지: " + String.format("%.2f", fatPerServing) + "g" +
-                        ", 칼로리: " + String.format("%.2f", caloriesPerServing) + "kcal" );
-            }
+                double carbohydratePerServing = carbohydrate1day / numMeals;
+                double proteinPerServing = protein1day / numMeals;
+                double fatPerServing = fat1day / numMeals;
+                double carbCalPerGram = food.getCalories() / carbohydratePerServing;
+                double carperServing = (carbohydratePerServing * 100) / food.getCarbohydrate();
+                double properServing = (proteinPerServing * 100) / food.getProtein();
+                double fatperServing = (fatPerServing * 100) / food.getFat();
+                double caloriesPerServing = carbohydratePerServing * carbCalPerGram;
+                System.out.println("------------------------------------------------------------------------------------");
+                System.out.print(food.getFoodGroup() + ": " + food.getName() + " ");
 
-            System.out.println(); // 끼니 사이에 빈 줄 추가
+                switch (food.getFoodGroup().toString()) {
+                    case "탄수화물":
+                        System.out.println("(탄: " + String.format("%.2f", carbohydratePerServing) + "g, "
+                                + "단: " + String.format("%.2f", carperServing * food.getProtein() / 100.0) + "g, "
+                                + "지: " + String.format("%.2f", carperServing * food.getFat() / 100.0) + "g, "
+                                + "칼: " + String.format("%.2f", carperServing * food.getCalories() / 100.0) + "kcal, "
+                                + "섭취량:  " + String.format("%.2f", carperServing) + "g)");
+                        break;
+                    case "단백질":
+                        System.out.println("(탄: " + String.format("%.2f", properServing * food.getCarbohydrate() / 100.0) + "g, "
+                                + "단: " + String.format("%.2f", proteinPerServing) + "g, "
+                                + "지: " + String.format("%.2f", properServing * food.getFat() / 100.0) + "g, "
+                                + "칼: " + String.format("%.2f", properServing * food.getCalories() / 100.0) + "kcal, "
+                                + "섭취량:  " + String.format("%.2f", properServing) + "g)");
+                        break;
+                    case "지방":
+                        System.out.println("(탄: " + String.format("%.2f", fatperServing * food.getCarbohydrate() / 100.0) + "g, "
+                                + "단: " + String.format("%.2f", fatperServing * food.getProtein() / 100.0) + "g, "
+                                + "지: " + String.format("%.2f", fatPerServing) + "g, "
+                                + "칼: " + String.format("%.2f", fatperServing * food.getCalories() / 100.0) + "kcal, "
+                                + "섭취량:  " + String.format("%.2f", fatperServing) + "g)");
+                        break;
+                    case "야채" :
+                        System.out.println("(탄: " + (food.getCarbohydrate()) + "g, "
+                                + "단: " +  (food.getProtein()) + "g, "
+                                + "지: " +  (food.getFat()) + "g, "
+                                + "칼: " +  (food.getCalories()) + "kcal, "
+                                + "섭취량: " + (100) + "g)");
+                        break;
+                    case "간식" :
+                        System.out.println("(탄: " + (food.getCarbohydrate()) + "g, "
+                                + "단: " +  (food.getProtein()) + "g, "
+                                + "지: " +  (food.getFat()) + "g, "
+                                + "칼: " +  (food.getCalories()) + "kcal, "
+                                + "섭취량: " + (100) + "g)");
+                        System.out.println("------------------------------------------------------------------------------------");
+                        break;
+                    default:
+                        System.out.println("유효하지 않은 식품 그룹입니다.");
+                        break;
+                }
+                    // 칼로리 값의 반환이 틀림. Food.getCalories 가 잘못 반환하는것 같음
+
+                }
+
+                System.out.println(); // 끼니 사이에 빈 줄 추가
+            }
         }
     }
-}
-

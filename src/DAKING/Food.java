@@ -56,7 +56,7 @@ public class Food {
         this.name = name;
     }
 
-    public int getCalories() {
+    public double getCalories() {
         return calories;
     }
 

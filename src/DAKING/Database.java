@@ -50,9 +50,9 @@ public class Database {
         Food food4 = new Food(Food.FoodGroup.탄수화물, "감자", 85, 19.63, 1.83, 0.1);
         Food food5 = new Food(Food.FoodGroup.탄수화물, "오트밀", 388, 70, 12.5, 8.75);
         Food food6 = new Food(Food.FoodGroup.탄수화물, "단호박", 39, 9.34, 1.09, 0.27);
-        Food food7 = new Food(Food.FoodGroup.탄수화물, "파스타면", 355, 73, 14, 1);
+//        Food food7 = new Food(Food.FoodGroup.탄수화물, "보리밥", 150, 32.88, 3.12, 0.35);
         Food food8 = new Food(Food.FoodGroup.탄수화물, "보리밥", 150, 32.88, 3.12, 0.35);
-        Food food9 = new Food(Food.FoodGroup.탄수화물, "콩밥", 345, 74.57, 9.11, 1.97);
+//        Food food9 = new Food(Food.FoodGroup.탄수화물, "보리밥", 150, 32.88, 3.12, 0.35);
         Food food10 = new Food(Food.FoodGroup.탄수화물, "식빵", 266, 50.61, 7.64, 3.29);
         Food food11 = new Food(Food.FoodGroup.탄수화물, "옥수수", 131, 29.58, 3.87, 1.59);
         Food food12 = new Food(Food.FoodGroup.탄수화물, "바나나", 89, 22.84, 1.09, 0.33);
@@ -62,9 +62,9 @@ public class Database {
         Food food16 = new Food(Food.FoodGroup.단백질, "연어", 146, 0, 21.62, 5.93);
         Food food17 = new Food(Food.FoodGroup.단백질, "돼지안심살", 136, 0, 20.54, 5.41);
         Food food18 = new Food(Food.FoodGroup.단백질, "우둔살", 137, 0, 22.17, 4.92);
-        Food food19 = new Food(Food.FoodGroup.단백질, "부채살", 149, 0, 20.4, 6.89);
-        Food food20 = new Food(Food.FoodGroup.단백질, "고등어", 167, 0, 19.32, 9.36);
-        Food food21 = new Food(Food.FoodGroup.단백질, "계란", 147, 0.77, 12.58, 9.94);
+        Food food19 = new Food(Food.FoodGroup.단백질, "사태살", 115, 0, 20.77, 2.94);
+        Food food20 = new Food(Food.FoodGroup.단백질, "대구살", 71, 0, 17.65, 0.59);
+        Food food21 = new Food(Food.FoodGroup.단백질, "계란흰자", 52, 0.73, 10.9, 0.17);
         Food food22 = new Food(Food.FoodGroup.단백질, "닭다리살", 156, 0, 18.7, 8.78);
         Food food23 = new Food(Food.FoodGroup.단백질, "참치회", 108, 2.81, 23.38, 0.95);
         Food food24 = new Food(Food.FoodGroup.단백질, "광어회", 103, 0, 20.44, 1.72);
@@ -106,9 +106,9 @@ public class Database {
         addFood(food4);
         addFood(food5);
         addFood(food6);
-        addFood(food7);
+//        addFood(food7);
         addFood(food8);
-        addFood(food9);
+//        addFood(food9);
         addFood(food10);
         addFood(food11);
         addFood(food12);
