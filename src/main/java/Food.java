@@ -1,4 +1,4 @@
-package DAKING;
+package main.java;
 public class Food {
     private FoodGroup foodGroup; // 음식 분류
     private String name; // 음식 이름

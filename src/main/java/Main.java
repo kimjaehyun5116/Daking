@@ -1,9 +1,7 @@
-package DAKING;
+package main.java;
 
-import java.sql.SQLOutput;
-import java.util.List;
 import java.util.Scanner;
-import DAKING.User;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
