@@ -231,9 +231,9 @@ public class DietPlanner {
         // 사용자의 탄단지칼로리 계산
         System.out.println("=====================================================");
         System.out.println(user.getName() + " 님의 하루 총 필요 탄,단,지,칼로리는");
-        System.out.println("탄: " + String.format("%.2f", carbohydrate1day) + ", 단:" + String.format("%.2f", protein1day) + ", 지: " + String.format("%.2f", fat1day) + ", 칼: " + String.format("%.2f", neededCalories) + " 이고, ");
-        System.out.println(user.getName() + " 님의 한끼 필요 탄,단,지,칼로리는");
-        System.out.println("탄: " + String.format("%.2f", carbohydrate1day / numMeals) + ", 단:" + String.format("%.2f", protein1day / numMeals) + ", 지: " + String.format("%.2f", fat1day / numMeals) + ", 칼: " + String.format("%.2f", neededCalories / numMeals) + " 입니다 ");
+        System.out.println("[탄] " + String.format("%.2f", carbohydrate1day) + "g [단] " + String.format("%.2f", protein1day) + "g [지] " + String.format("%.2f", fat1day) + "g [칼]: " + String.format("%.2f", neededCalories) + "kcal 이고, ");
+        System.out.println(user.getName() + " 님의 끼니당 필요 탄,단,지,칼로리는");
+        System.out.println("[탄] " + String.format("%.2f", carbohydrate1day / numMeals) + "g [단] " + String.format("%.2f", protein1day / numMeals) + "g [지]: " + String.format("%.2f", fat1day / numMeals) + "g [칼]: " + String.format("%.2f", neededCalories / numMeals) + "kcal 입니다 ");
         System.out.println("=====================================================");
         System.out.println(" ");
 
@@ -272,21 +272,21 @@ public class DietPlanner {
                                 + "단: " + String.format("%.2f", carperServing * food.getProtein() / 100.0) + "g, "
                                 + "지: " + String.format("%.2f", carperServing * food.getFat() / 100.0) + "g, "
                                 + "칼: " + String.format("%.2f", carperServing * food.getCalories() / 100.0) + "kcal, "
-                                + "섭취량:  " + String.format("%.2f", carperServing) + "g)");
+                                + "섭취량: " + String.format("%.2f", carperServing) + "g)");
                         break;
                     case "단백질":
                         System.out.println("(탄: " + String.format("%.2f", properServing * food.getCarbohydrate() / 100.0) + "g, "
                                 + "단: " + String.format("%.2f", proteinPerServing) + "g, "
                                 + "지: " + String.format("%.2f", properServing * food.getFat() / 100.0) + "g, "
                                 + "칼: " + String.format("%.2f", properServing * food.getCalories() / 100.0) + "kcal, "
-                                + "섭취량:  " + String.format("%.2f", properServing) + "g)");
+                                + "섭취량: " + String.format("%.2f", properServing) + "g)");
                         break;
                     case "지방":
                         System.out.println("(탄: " + String.format("%.2f", fatperServing * food.getCarbohydrate() / 100.0) + "g, "
                                 + "단: " + String.format("%.2f", fatperServing * food.getProtein() / 100.0) + "g, "
                                 + "지: " + String.format("%.2f", fatPerServing) + "g, "
                                 + "칼: " + String.format("%.2f", fatperServing * food.getCalories() / 100.0) + "kcal, "
-                                + "섭취량:  " + String.format("%.2f", fatperServing) + "g)");
+                                + "섭취량: " + String.format("%.2f", fatperServing) + "g)");
                         break;
                     case "야채":
                         System.out.println("(탄: " + (food.getCarbohydrate()) + "g, "

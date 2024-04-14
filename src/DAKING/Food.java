@@ -102,17 +102,13 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" +
-                "foodGroup=" + foodGroup +
-                ", name='" + name + '\'' +
-                ", calories=" + calories +
-                ", carbohydrate=" + carbohydrate +
-                ", protein=" + protein +
-                ", fat=" + fat +
-                ", servingSize=" + servingSize +
-                ", Vegetable =" + Vegetable +
-                ", Snack =" + Snack +
-                '}';
+        return  "[그룹분류] " + foodGroup +
+                " [이름] " + name +
+                " [칼로리] " + calories + "kcal" +
+                " [탄수화물] " + carbohydrate + "g" +
+                " [단백질] " + protein + "g" +
+                " [지방] " + fat + "g" +
+                " [기준 양] " + "100g";
     }
 
 

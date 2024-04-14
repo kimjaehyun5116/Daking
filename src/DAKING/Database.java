@@ -1,23 +1,24 @@
 package DAKING;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Database {
+    private Map<String, List<Food>> foodGroupMap; // 음식 그룹별 데이터베이스
     private Map<String, Food> foodDatabase; // 음식 데이터베이스
+
 
     // 생성자
     public Database() {
         this.foodDatabase = new HashMap<>();
+        this.foodGroupMap = new LinkedHashMap<>();
 
         addPredefinedFoods();
     }
 
     // 음식 추가 메서드
     public void addFood(Food food) {
+
         foodDatabase.put(food.getName(), food);
     }
 
@@ -30,6 +31,7 @@ public class Database {
     public List<Food> getAllFood() {
         return new ArrayList<>(foodDatabase.values());
     }
+
     // 음식 그룹에서 랜덤하게 음식을 선택하는 메서드
     public List<Food> getPredefinedFoods(Food.FoodGroup group) {
         List<Food> foodsInGroup = new ArrayList<>();
@@ -39,6 +41,17 @@ public class Database {
             }
         }
         return foodsInGroup;
+    }
+
+    public void showPredefinedFoods() {
+
+        for (String group : foodGroupMap.keySet()) {
+            System.out.println("====== " + group + " ======");
+            for (Food food : foodGroupMap.get(group)) {
+                System.out.println(food);
+            }
+            System.out.println();
+        }
     }
 
 
@@ -156,7 +169,67 @@ public class Database {
         addFood(food54);
         addFood(food55);
         addFood(food56);
+
+        foodGroupMap.put("탄수화물", new ArrayList<>());
+        foodGroupMap.put("단백질", new ArrayList<>());
+        foodGroupMap.put("지방", new ArrayList<>());
+        foodGroupMap.put("야채", new ArrayList<>());
+        foodGroupMap.put("간식", new ArrayList<>());
+
+        for (Food food : foodDatabase.values()) {
+            String groupName = food.getFoodGroup().toString();
+            if (!foodGroupMap.containsKey(groupName)) {
+                foodGroupMap.put(groupName, new ArrayList<>());
+            }
+            foodGroupMap.get(groupName).add(food);
+        }
     }
+    // 그룹별 음식 조회 메서드
+    public void showGroupedFoods(Scanner scanner) {
+        System.out.println("===== 그룹별 음식 조회 =====");
+        System.out.println("1. 탄수화물");
+        System.out.println("2. 단백질");
+        System.out.println("3. 지방");
+        System.out.println("4. 야채");
+        System.out.println("5. 간식");
+        System.out.println("6. 이전 메뉴로 돌아가기");
+        System.out.print("조회할 그룹을 선택하세요: ");
 
+        int choice = scanner.nextInt();
+        scanner.nextLine();
 
+        switch (choice) {
+            case 1:
+                showFoodsByGroup("탄수화물");
+                break;
+            case 2:
+                showFoodsByGroup("단백질");
+                break;
+            case 3:
+                showFoodsByGroup("지방");
+                break;
+            case 4:
+                showFoodsByGroup("야채");
+                break;
+            case 5:
+                showFoodsByGroup("간식");
+                break;
+            case 6:
+                return; // 이전 메뉴로 돌아가기
+            default:
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+        }
+    }
+    // 특정 그룹의 음식 조회 메서드
+    private void showFoodsByGroup(String groupName) {
+        if (foodGroupMap.containsKey(groupName)) {
+            List<Food> foods = foodGroupMap.get(groupName);
+            System.out.println("====== " + groupName + " ======");
+            for (Food food : foods) {
+                System.out.println(food);
+            }
+        } else {
+            System.out.println("해당 그룹에 속하는 음식이 없습니다.");
+        }
+    }
 }
