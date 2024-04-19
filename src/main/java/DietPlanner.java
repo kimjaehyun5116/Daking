@@ -56,6 +56,40 @@ public class DietPlanner {
         recommendFoodsForMeals((int) caloriesPerMeal, macronutrientRatios, (int) numMeals);
     }
 
+    public void choiceDietPlan(User user) {
+
+        System.out.println("================================================");
+        System.out.println("식단 계획을 제공합니다.");
+
+        // 유저의 기초대사랑 (BMR) 계산
+
+        int bmr;
+        if (user.getGender() == '남') {
+            // 남성의 경우 대사율 계산 방법
+            bmr = (int) (66.5 + (13.75 * user.getWeight()) + (5.003 * user.getHeight()) - (6.755 * user.getAge()));
+        } else {
+            // 여성의 경우 대사율 계산 방법
+            bmr = (int) (655.1 + (9.563 * user.getWeight()) + (1.850 * user.getHeight()) - (4.676 * user.getAge()));
+        }
+
+        // 필요대사량 구하기 (기초대사량*활동대사량)+목표
+        double neededCalories = (bmr * getMetabolicRateFromActivityLevel()) + adjustMetabolicRateBasedOnDietPurpose();
+
+        // 식단 비율 선택
+        double[] macronutrientRatios = selectMacronutrientRatios();
+
+        // 하루 끼니 수 선택
+        int numMeals = selectNumberOfMeals(user);
+
+        // 한 끼당 필요한 칼로리 계산
+        double caloriesPerMeal = neededCalories / numMeals;
+
+        test(bmr, numMeals, macronutrientRatios, neededCalories);
+
+
+        // 각 끼니별로 음식을 추천하여 출력
+        choicedFoodsForMeals((int) caloriesPerMeal, macronutrientRatios, (int) numMeals);
+    }
 
     private void recommendFoodsForMeals(int caloriesPerMeal, double[] requiredCarbohydrate, int numMeals) {
         List<Food> recommendedFoods = new ArrayList<>();
@@ -72,7 +106,64 @@ public class DietPlanner {
 
         }
     }
+        public void choicedFoodsForMeals ( int caloriesPerMeal, double[] requiredCarbohydrate, int numMeals){
+            List<Food> recommendedFoods = new ArrayList<>();
+            Scanner scanner = new Scanner(System.in);
 
+            // 사용자가 각 영양소에 해당하는 음식 이름을 입력하여 추천 음식을 가져옴
+            for (int i = 0; i < numMeals; i++) {
+                System.out.println("===== 음식을 선택해주세요 =====");
+                System.out.println("1. 탄수화물");
+                System.out.println("2. 단백질");
+                System.out.println("3. 지방");
+                System.out.println("4. 간식");
+                System.out.print("메뉴를 선택하세요 : ");
+
+                int nutrientChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                String nutrient = "";
+
+                // 사용자가 선택한 영양소에 따라 영양소 이름 설정
+                switch (nutrientChoice) {
+                    case 1:
+                        nutrient = "탄수화물";
+                        break;
+                    case 2:
+                        nutrient = "단백질";
+                        break;
+                    case 3:
+                        nutrient = "지방";
+                        break;
+                    case 4:
+                        nutrient = "간식";
+                        break;
+                    default:
+                        System.out.println("잘못된 입력입니다.");
+                        return;
+                }
+
+                System.out.print(nutrient + " 음식을 입력하세요: ");
+                String foodName = scanner.nextLine();
+
+                // 입력한 음식 이름으로 음식 데이터베이스에서 음식을 가져옴
+                Food recommendedFood = database.getByName(foodName);
+
+                // 추천된 음식을 리스트에 추가
+                if (recommendedFood != null) {
+                    recommendedFoods.add(recommendedFood);
+
+                    // 음식 정보 출력
+                    System.out.println("추천된 음식: " + recommendedFood.getName());
+                    System.out.println("칼로리: " + recommendedFood.getCalories() + "kcal");
+                    System.out.println("탄수화물: " + recommendedFood.getCarbohydrates() + "g");
+                    System.out.println("단백질: " + recommendedFood.getProtein() + "g");
+                    System.out.println("지방: " + recommendedFood.getFat() + "g");
+                } else {
+                    System.out.println("해당하는 음식이 데이터베이스에 없습니다.");
+                }
+            }
+        }
     private double getMetabolicRateFromActivityLevel() {
         System.out.println("================================================");
         System.out.println("활동 수준을 선택하세요");

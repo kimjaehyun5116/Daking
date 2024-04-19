@@ -232,4 +232,8 @@ public class Database {
             System.out.println("해당 그룹에 속하는 음식이 없습니다.");
         }
     }
+
+    public Food getByName(String name){
+        return foodDatabase.get(name);
+    }
 }

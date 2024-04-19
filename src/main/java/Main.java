@@ -19,11 +19,9 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // 사용자 정보 입력
                     User user = User.getUserInfoFromInput();
-                    // DietPlanner 클래스 인스턴스 생성
                     DietPlanner dietPlanner = new DietPlanner(database, user, 1.0);
-                    dietPlanner.provideDietPlan(user); // 식단 계획 제공 메서드 호출
+                    choiceDietPlanner(user, dietPlanner);
                     break;
                 case 2:
                     showFoodInfoMenu(database, scanner); // 음식 정보 조회 메뉴
@@ -34,6 +32,27 @@ public class Main {
                 default:
                     System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
             }
+        }
+    }
+
+    private static void choiceDietPlanner(User user , DietPlanner dietPlanner) {
+
+        Scanner scanner = new Scanner(System.in);
+        Database database = new Database();
+        System.out.println("===== 메뉴를 선택해주세요 =====");
+        System.out.println("1. 식단 랜덤으로 구성하기");
+        System.out.println("2. 식단 선택하여 구성하기");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                dietPlanner.provideDietPlan(user); // 식단 계획 제공 메서드 호출
+                break;
+            case 2:
+                dietPlanner.choiceDietPlan(user);
+                break;
         }
     }
 
