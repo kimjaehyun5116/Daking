@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet.html</title>
+    <script type="text/javascript">
+        function joinCheck() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var height = document.getElementById("height").value;
+            var weight = document.getElementById("weight").value;
+
+            if (name.trim() === "") {
+                alert("이름을 입력해주세요.");
+                document.getElementById("name").focus();
+                return false;
+            }
+            if (age.trim() === "") {
+                alert("나이를 입력해주세요.");
+                document.getElementById("age").focus();
+                return false;
+            }
+            if (height.trim() === "") {
+                alert("키를 입력해주세요.");
+                document.getElementById("height").focus();
+                return false;
+            }
+            if (weight.trim() === "") {
+                alert("체중을 입력해주세요.");
+                document.getElementById("weight").focus();
+                return false;
+            }
+
+            // 모든 필드가 입력되었을 때만 페이지 이동
+            window.location.href = "Daking menu.html";
+            return true;
+        }
+        function selectRadio(x){
+          // 모든 라디오버튼을 미선택으로 변경
+          document.getElementById("r1").src = "images/radio1.png";
+          document.getElementById("r2").src = "images/radio1.png";
+          // 선택된 라디오 버튼을 선택으로 변경
+          document.getElementById("r" + x).src = "images/radio2.png";
+
+          if(x==1) document.getElementById('val').value = '남성';
+          else document.getElementById('val').value = '여성';
+      }
+
+    </script>
+    <style type="text/css">
+        img {
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        margin-right: 50px;
+      }
+        body {
+            display: flex;
+            justify-content: center;
+            margin-top: 20%;
+            height: 100vh;
+        }
+        .main {
+            width: 300px;
+            background: rgb(249, 255, 226);
+            justify-content: center;
+            height: 350px;
+            border: 2px solid#444;
+            padding: 30px;
+            box-shadow: 5px 5px 5px #444;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+        }
+        .main h2 {
+            width: 150px;
+            font-weight: bold;
+            font-size: 28px;
+            margin: 0 auto 20px auto;
+            color: black;
+            border: 2px solid black;
+            background: #e8e9eb;
+            border-radius: 10px;
+            text-align: center; 
+            margin-top: 50px;
+        }
+        .field {
+            display: flex;
+            margin: 5px 0;
+            align-items: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .field .genderMale {
+            margin-left: 10px;
+        }
+        .field .genderFemale {
+            margin-left: 10px;
+        }
+        label {
+            color: black;
+            font-weight: bold;
+            font-size: 15px;
+            width: 50px;
+            flex: 1;
+        }
+        input {
+            flex: 4;
+            padding: 5px;
+            border-radius: 7px;
+        }
+        
+        a {
+            text-decoration: none;
+            text-align: center;
+            justify-content: center;
+        }
+        .btn {
+            margin:0 auto;
+            background: rgb(214, 214,27);
+            color: black;
+            font-size: medium;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid black; 
+            padding: 10px;
+            width: 100px;
+            margin-bottom: 30px;
+        }
+    
+    </style>
+</head>
+<body>
+    <form class="main" name="frm">
+        <h2>DAKING</h2>
+        <div class="field">
+            <label for="name">이름</label>
+            <input type="text" id="name" />
+        </div>
+        <div class="field">
+            <label for="gender">성별</label>
+            <td>
+                남성<img src="images/radio1.png" id="r1" class="genderMale" onclick="selectRadio(1)" />
+                여성<img src="images/radio2.png" id="r2" class="genderFemale" onclick="selectRadio(2)" />
+            </td>
+        </div>
+        <div class="field">
+            <label for="age">나이</label>
+            <input type="text" id="age" />
+        </div>
+        <div class="field">
+            <label for="height">키</label>
+            <input type="text" id="height" />
+        </div>
+        <div class="field">
+            <label for="weight">체중</label>
+            <input type="text" id="weight" />
+        </div>
+        <div class="field">
+            <a href="Daking main.html" class="btn">이전</a>
+            <a class="btn" onclick="return joinCheck();">다음</a>
+        </div>
+    </form>
+</body>
+</html>
