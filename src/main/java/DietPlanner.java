@@ -55,42 +55,6 @@ public class DietPlanner {
         // 각 끼니별로 음식을 추천하여 출력
         recommendFoodsForMeals((int) caloriesPerMeal, macronutrientRatios, (int) numMeals);
     }
-
-    public void choiceDietPlan(User user) {
-
-        System.out.println("================================================");
-        System.out.println("식단 계획을 제공합니다.");
-
-        // 유저의 기초대사랑 (BMR) 계산
-
-        int bmr;
-        if (user.getGender() == '남') {
-            // 남성의 경우 대사율 계산 방법
-            bmr = (int) (66.5 + (13.75 * user.getWeight()) + (5.003 * user.getHeight()) - (6.755 * user.getAge()));
-        } else {
-            // 여성의 경우 대사율 계산 방법
-            bmr = (int) (655.1 + (9.563 * user.getWeight()) + (1.850 * user.getHeight()) - (4.676 * user.getAge()));
-        }
-
-        // 필요대사량 구하기 (기초대사량*활동대사량)+목표
-        double neededCalories = (bmr * getMetabolicRateFromActivityLevel()) + adjustMetabolicRateBasedOnDietPurpose();
-
-        // 식단 비율 선택
-        double[] macronutrientRatios = selectMacronutrientRatios();
-
-        // 하루 끼니 수 선택
-        int numMeals = selectNumberOfMeals(user);
-
-        // 한 끼당 필요한 칼로리 계산
-        double caloriesPerMeal = neededCalories / numMeals;
-
-        test(bmr, numMeals, macronutrientRatios, neededCalories);
-
-
-        // 각 끼니별로 음식을 추천하여 출력
-        choicedFoodsForMeals((int) caloriesPerMeal, macronutrientRatios, (int) numMeals);
-    }
-
     private void recommendFoodsForMeals(int caloriesPerMeal, double[] requiredCarbohydrate, int numMeals) {
         List<Food> recommendedFoods = new ArrayList<>();
         Random random = new Random();
@@ -106,18 +70,117 @@ public class DietPlanner {
 
         }
     }
-        public void choicedFoodsForMeals ( int caloriesPerMeal, double[] requiredCarbohydrate, int numMeals){
+
+    public void SampleDietPlan(User user) {
+
+        System.out.println("================================================");
+        System.out.println("메뉴를 선택해주세요.");
+        System.out.println("1. 샘플 벌크업 식단 보기");
+        System.out.println("2. 샘플 다이어트 식단 보기");
+        System.out.print("메뉴를 선택하세요 : ");
+
+        int sampleChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (sampleChoice) {
+            case 1:
+                bulkUpDietSample();
+                break;
+            case 2:
+
+                dietDietsample();
+                break;
+
+            default:
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요");
+                return;
+        }
+    }
+        public static void bulkUpDietSample() {
+            System.out.println("벌크업을 위한 식단은 고단백, 고탄수화물, 그리고 적정양의 지방을 포함하는 것이 일반적입니다.");
+            System.out.println("아래는 벌크업을 위한 샘플 식단표의 예시입니다. 이는 단순한 예시이며, 각 개인의 몸무게, 목표 등에따라 조절되어야 합니다.");
+            System.out.println("또한, 식단은 영양학적으로 균형을 이루는 것이 중요하므로 이를 고려하여 구성되어야 합니다.");
+            System.out.println("===============================================================================");
+
+            // 아침
+            System.out.println("아침");
+            System.out.println("계란 3개");
+            System.out.println("오트밀 100g");
+            System.out.println("바나나 1개");
+            System.out.println("닭가슴살 샐러드");
+
+            // 간식 1
+            System.out.println("\n간식 (1)");
+            System.out.println("견과류 혼합 1/4컵");
+            System.out.println("그릭 요거트 1컵");
+            System.out.println("사과 2개");
+
+            // 점심
+            System.out.println("\n점심");
+            System.out.println("갈비찜 200g");
+            System.out.println("현미 300g");
+            System.out.println("콩 샐러드");
+            System.out.println("시금치 스프");
+
+            // 간식 2
+            System.out.println("\n간식 (2)");
+            System.out.println("닭가슴살 샌드위치");
+            System.out.println("아몬드 우유 1잔");
+            System.out.println("바나나 3개");
+
+            // 저녘
+            System.out.println("\n저녘");
+            System.out.println("연어 스테이크 200g");
+            System.out.println("감자 3개");
+            System.out.println("브로콜리 스팀 1컵");
+            System.out.println("올리브 오일 드레싱");
+
+        }
+        public static void dietDietsample() {
+            System.out.println("다이어트를 위한 식단은 칼로리를 제한하면서도 영양소를 균형 있게 섭취하여 건강하게 체중을 감량하는데 도움이 됩니다.");
+            System.out.println("아래는 다이어트를 위한 샘플 식단표의 예시입니다. 이는 단순한 예시이며, 각 개인의 몸무게, 목표 등에따라 조절되어야 합니다. ");
+            System.out.println("또한, 식단은 영양학적으로 균형을 이루는 것이 중요하므로 이를 고려하여 구성되어야 합니다.");
+            System.out.println("===============================================================================");
+
+            // 아침
+            System.out.println("아침");
+            System.out.println("삶은 계란 2개");
+            System.out.println("샐러드");
+            System.out.println("닭가슴살 샐러드");
+
+            // 간식 1
+            System.out.println("\n간식 (1)");
+            System.out.println("그릭 요거트와 소량의 과일");
+
+            // 점심
+            System.out.println("\n점심");
+            System.out.println("참치 샐러드 샌드위치 ½쪽");
+            System.out.println("양배추 슬로우");
+
+            // 간식 2
+            System.out.println("\n간식 (2)");
+            System.out.println("건강한 영양바");
+
+            // 저녘
+            System.out.println("\n저녘");
+            System.out.println("연어 스테이크 100g");
+            System.out.println("채소볶음");
+            System.out.println("통밀빵 1쪽");
+
+        }
+
+
+        public void choicedFoodsForMeals ( double caloriesPerMeal, double[] requiredCarbohydrate, int numMeals){
             List<Food> recommendedFoods = new ArrayList<>();
             Scanner scanner = new Scanner(System.in);
 
             // 사용자가 각 영양소에 해당하는 음식 이름을 입력하여 추천 음식을 가져옴
             for (int i = 0; i < numMeals; i++) {
-                System.out.println("===== 음식을 선택해주세요 =====");
-                System.out.println("1. 탄수화물");
-                System.out.println("2. 단백질");
-                System.out.println("3. 지방");
-                System.out.println("4. 간식");
-                System.out.print("메뉴를 선택하세요 : ");
+                System.out.print("===== 음식을 선택해주세요 =====");
+                System.out.print("1. 탄수화물 :");
+                System.out.print("2. 단백질 :");
+                System.out.print("3. 지방 :");
+                System.out.print("4. 간식 :");
 
                 int nutrientChoice = scanner.nextInt();
                 scanner.nextLine();
@@ -139,7 +202,7 @@ public class DietPlanner {
                         nutrient = "간식";
                         break;
                     default:
-                        System.out.println("잘못된 입력입니다.");
+                        System.out.println("잘못된 입력입니다. 다시 입력해주세요");
                         return;
                 }
 
@@ -159,6 +222,7 @@ public class DietPlanner {
                     System.out.println("탄수화물: " + recommendedFood.getCarbohydrates() + "g");
                     System.out.println("단백질: " + recommendedFood.getProtein() + "g");
                     System.out.println("지방: " + recommendedFood.getFat() + "g");
+
                 } else {
                     System.out.println("해당하는 음식이 데이터베이스에 없습니다.");
                 }

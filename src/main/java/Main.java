@@ -40,8 +40,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Database database = new Database();
         System.out.println("===== 메뉴를 선택해주세요 =====");
-        System.out.println("1. 식단 랜덤으로 구성하기");
-        System.out.println("2. 식단 선택하여 구성하기");
+        System.out.println("1. 맞춤 식단 구성하기");
+        System.out.println("2. 샘플 식단 보기");
+        System.out.print("메뉴를 선택하세요 : ");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -51,7 +52,7 @@ public class Main {
                 dietPlanner.provideDietPlan(user); // 식단 계획 제공 메서드 호출
                 break;
             case 2:
-                dietPlanner.choiceDietPlan(user);
+                dietPlanner.SampleDietPlan(user);
                 break;
         }
     }
