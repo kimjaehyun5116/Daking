@@ -1,129 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daking Several meals.html</title>
     <style type="text/css">
-        img {
-            width: 20px;
-            height: 20px;
-            margin-top: 30px;
-            margin-left: 30px;
+      img {
+        width: 20px;
+        height: 20px;
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        height: 100vh;
+      }
+      .main {
+        width: 300px;
+        background: rgb(249, 255, 226);
+        justify-content: center;
+        height: 350px;
+        border: 2px solid #444;
+        padding: 30px;
+        box-shadow: 5px 5px 5px #444;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+      }
+      .main h2 {
+        width: 150px;
+        font-weight: bold;
+        font-size: 28px;
+        margin: 0 auto 20px auto;
+        color: black;
+        border: 2px solid black;
+        background: #e8e9eb;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 1%;
+        margin-bottom: 10%;
+      }
 
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            margin-top: 5%;
-            height: 100vh;
-        }
-        .main {
-            width: 300px;
-            background: rgb(249, 255, 226);
-            justify-content: center;
-            height: 350px;
-            border: 2px solid #444;
-            padding: 30px;
-            box-shadow: 5px 5px 5px #444;
-            display: flex;
-            flex-direction: column;
-            border-radius: 10px;
-        }
-        .main h2 {
-            width: 150px;
-            font-weight: bold;
-            font-size: 28px;
-            margin: 0 auto 20px auto;
-            color: black;
-            border: 2px solid black;
-            background: #e8e9eb;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 1%;
-            margin-bottom: 10%;
-        }
-
-        label {
-            margin-left: 25px;
-            width: 250px;
-            border-radius: 10px;
-            font-size: large;
-            border: 2px solid black;
-            text-decoration: none;
-            text-align: center;
-            background-color: rgb(214, 214,27);
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        .text {
-            display: flex;
-            align-items: center;
-            height: 200px;
-        }
-        .text1, .text2, .text3, .text4 {
-            width: 100px;
-            height: 100px;
-            border: 1px solid black;
-        }
-        .btn1 {
-            margin:0 auto;
-            background: rgb(214, 214,27);
-            color: black;
-            font-size: medium;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            border: 2px solid black;
-            padding: 10px;
-            width: 100px;
-            margin-top: 10px;
-        }
-        .field {
-            display: flex;
-            margin: 5px 0;
-            justify-content: center;
-            margin-bottom: 10%;
-
-        }
-        a {
-            text-decoration: none;
-            text-align: center;
-        }
-
+      label {
+        margin-left: 25px;
+        width: 250px;
+        border-radius: 10px;
+        font-size: large;
+        border: 2px solid black;
+        text-decoration: none;
+        text-align: center;
+        background-color: rgb(214, 214, 27);
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+      .text {
+        display: flex;
+        align-items: center;
+        height: 200px;
+      }
+      .text1,
+      .text2,
+      .text3,
+      .text4 {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+      }
+      .btn1 {
+        margin: 0 auto;
+        background: rgb(214, 214, 27);
+        color: black;
+        font-size: medium;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid black;
+        padding: 10px;
+        width: 100px;
+        margin-top: 10px;
+      }
+      .field {
+        display: flex;
+        margin: 5px 0;
+        justify-content: center;
+        margin-bottom: 10%;
+      }
+      a {
+        text-decoration: none;
+        text-align: center;
+      }
+      .btn1:hover {
+        background: greenyellow;
+      }
     </style>
     <script type="text/javascript">
-        function selectRadio(x){
-            // 모든 라디오버튼을 미선택으로 변경
-            document.getElementById("r1").src = "images/radio1.png";
-            document.getElementById("r2").src = "images/radio1.png";
-            document.getElementById("r3").src = "images/radio1.png";
-            document.getElementById("r4").src = "images/radio1.png";
-            // 선택된 라디오 버튼을 선택으로 변경
-            document.getElementById("r" + x).src = "images/radio2.png";
-        }
-
+      function selectRadio(x) {
+        // 모든 라디오버튼을 미선택으로 변경
+        document.getElementById("r1").src = "images/radio1.png";
+        document.getElementById("r2").src = "images/radio1.png";
+        document.getElementById("r3").src = "images/radio1.png";
+        document.getElementById("r4").src = "images/radio1.png";
+        // 선택된 라디오 버튼을 선택으로 변경
+        document.getElementById("r" + x).src = "images/radio2.png";
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <form class="main">
-        <h2>DAKING</h2>
-        <label for="Activity">활동 수준을 선택하세요</label>
-        <div class="text">
-            <div class="text1">
-                거의 없음<br><br><img src="images/radio2.png" id="r1" class="Activity" onclick="selectRadio(1)" /></div>
-            <div class="text2">
-                적음(주 1~3회)<br><img src="images/radio1.png" id="r2" class="Activity" onclick="selectRadio(2)" /></div>
-            <div class="text3">
-                보통(주 3~5회)<br><img src="images/radio1.png" id="r3" class="Activity" onclick="selectRadio(3)" /></div>
-            <div class="text4">
-                많음(하루 2회 이상)<img src="images/radio1.png" id="r4" class="Activity" onclick="selectRadio(4)" /></div>
+      <h2>DAKING</h2>
+      <label for="Activity">활동 수준을 선택하세요</label>
+      <div class="text">
+        <div class="text1">
+          거의 없음<br /><br /><img
+            src="images/radio2.png"
+            id="r1"
+            class="Activity"
+            onclick="selectRadio(1)"
+          />
         </div>
-        <div class="field">
-            <a href="Daking Balance.html" class="btn1">이전</a>
-            <a href="Daking Several meals.html" class="btn1">다음</a>
+        <div class="text2">
+          적음(주 1~3회)<br /><img
+            src="images/radio1.png"
+            id="r2"
+            class="Activity"
+            onclick="selectRadio(2)"
+          />
         </div>
+        <div class="text3">
+          보통(주 3~5회)<br /><img
+            src="images/radio1.png"
+            id="r3"
+            class="Activity"
+            onclick="selectRadio(3)"
+          />
+        </div>
+        <div class="text4">
+          많음(하루 2회 이상)<img
+            src="images/radio1.png"
+            id="r4"
+            class="Activity"
+            onclick="selectRadio(4)"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <a href="Daking Balance.html" class="btn1">이전</a>
+        <a href="Daking Several meals.html" class="btn1">다음</a>
+      </div>
     </form>
-    
-</body>
+  </body>
 </html>
