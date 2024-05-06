@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daking Several meals.html</title>
+    <title>Daking Activity.html</title>
     <style type="text/css">
         img {
             width: 20px;
             height: 20px;
-            margin-top: 30px;
-            margin-left: 30px;
+            margin-top: 20px;
+            margin-left: 0px;
 
         }
         body {
@@ -45,8 +45,8 @@
         }
 
         label {
-            margin-left: 25px;
-            width: 250px;
+            margin-left:0px;
+            width: 300px;
             border-radius: 10px;
             font-size: large;
             border: 2px solid black;
@@ -65,6 +65,7 @@
             width: 100px;
             height: 100px;
             border: 1px solid black;
+            text-align: center;
         }
         .btn1 {
             margin:0 auto;
@@ -98,7 +99,6 @@
             document.getElementById("r1").src = "images/radio1.png";
             document.getElementById("r2").src = "images/radio1.png";
             document.getElementById("r3").src = "images/radio1.png";
-            document.getElementById("r4").src = "images/radio1.png";
             // 선택된 라디오 버튼을 선택으로 변경
             document.getElementById("r" + x).src = "images/radio2.png";
         }
@@ -108,19 +108,17 @@
 <body>
     <form class="main">
         <h2>DAKING</h2>
-        <label for="Activity">활동 수준을 선택하세요</label>
+        <label for="Several meals">하루 섭취할 끼니 수를 선택하세요</label>
         <div class="text">
             <div class="text1">
-                거의 없음<br><br><img src="images/radio2.png" id="r1" class="Activity" onclick="selectRadio(1)" /></div>
+                3끼<br><img src="images/radio2.png" id="r1" class="meals" onclick="selectRadio(1)" /></div>
             <div class="text2">
-                적음(주 1~3회)<br><img src="images/radio1.png" id="r2" class="Activity" onclick="selectRadio(2)" /></div>
+                4끼<br><img src="images/radio1.png" id="r2" class="meals" onclick="selectRadio(2)" /></div>
             <div class="text3">
-                보통(주 3~5회)<br><img src="images/radio1.png" id="r3" class="Activity" onclick="selectRadio(3)" /></div>
-            <div class="text4">
-                많음(하루 2회 이상)<img src="images/radio1.png" id="r4" class="Activity" onclick="selectRadio(4)" /></div>
+                5끼<br><img src="images/radio1.png" id="r3" class="meals" onclick="selectRadio(3)" /></div>
         </div>
         <div class="field">
-            <a href="Daking Activity.html.html" class="btn1">이전</a>
+            <a href="Daking Activity.html" class="btn1">이전</a>
             <a href="Daking Several meals.html" class="btn1">다음</a>
         </div>
     </form>
